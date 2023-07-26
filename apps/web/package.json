@@ -3,12 +3,21 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm-run-all -l build:temporal --parallel dev:temporal dev:next start:worker",
+    "dev:next": "next dev",
+    "dev:temporal": "tsc --build --watch ./temporal/tsconfig.json",
+    "build": "npm-run-all -l --parallel build:next build:temporal",
+    "build:next": "next build",
+    "build:temporal": "tsc --build ./temporal/tsconfig.json",
     "start": "next start",
-    "lint": "next lint"
+    "start:worker": "node ./temporal/lib/worker",
+    "lint": "eslint ."
   },
   "dependencies": {
+    "@temporalio/activity": "^1.8.1",
+    "@temporalio/client": "^1.8.1",
+    "@temporalio/worker": "^1.8.1",
+    "@temporalio/workflow": "^1.8.1",
     "next": "^13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
