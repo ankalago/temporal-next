@@ -1,5 +1,5 @@
 import { Connection, Client } from '@temporalio/client';
-import { OneClickBuy } from '../../../temporal/lib/workflows.js';
+import { OneClickBuy } from 'temporal/lib/workflows.js';
 import {NextResponse} from "next/server";
 
 export async function POST(req: Request) {
